@@ -1,4 +1,4 @@
-```mermaid
+```mermaid```mermaid```mermaid
 flowchart TD
     subgraph Ingress Layer
         A[Caller Calls TFN] -->|SIP Trunking| B[SIP Gateway / SBC]

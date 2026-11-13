@@ -6,7 +6,7 @@ flowchart TD
     end
 
     subgraph Core Orchestration & State Layer
-        H -->|Incoming Session & SIP Payload| ORCH[Orchestrator / VAIC Engine]
+        H -->|Incoming Session & SIP Payload| CCAAS
         ORCH -->|Manage Conversation State & Turn Transitions| BOT_STATE[(Bot State Machine)]
     end
 
@@ -40,3 +40,5 @@ flowchart TD
 
     %% CCaaS Escalation
     ORCH -->|Final Session State & DTO Handoff| CCAAS[CCaaS Platform]
+    CCAAS[CCaaS Platform] -->|Agent Queue & Transfer to Live Agents| Call_Centre[Call Centre Operations]
+    CCAAS --> ORCH

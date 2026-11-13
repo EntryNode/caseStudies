@@ -1,5 +1,5 @@
 ````mermaid
-flowchart LR
+flowchart TD
 A[Main Bot]
 B[CCAAS]
 C[Ingress PaymentBot]
@@ -19,6 +19,8 @@ P{amount confirmed?}
 Q{sessionId=New?}
 R{onetimePayment?}
 S[Collect Token]
+T[call payment API]
+U[Transfer back to Main Bot]
 
 
 
@@ -28,8 +30,9 @@ subgraph Ingress Layer
     end
 subgraph Payment Bot
         C -->R
-        Q-->|No|S
-        
+        Q-->|No|O
+        O-->|Collect old Session Details|S
+        H-->B
         R -->|No|E
         R-->|Yes|D
         D-->Q
@@ -39,7 +42,9 @@ subgraph Payment Bot
         P-->|yes|O
         P-->|No Max 2 retries|G
         O-->H
-        
+        S-->T
+        T-->U
+        U-->B
         F -->|No| G
         F -->|Yes| O
     end

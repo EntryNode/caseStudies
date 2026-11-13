@@ -21,8 +21,8 @@ R{onetimePayment?}
 S[Collect Token]
 T[call payment API]
 U[Transfer back to Main Bot]
-
-
+V[External Payment System]
+W{Success}
 
 subgraph Ingress Layer
         A -->|Intent=Payment| B
@@ -35,7 +35,7 @@ subgraph Payment Bot
         F -->|No| G
         F -->|Yes| O
         G-->P
-        H-->|1st Leg|B
+        H-->B
         O-->|Give old Session Details|S
         O-->H
         P-->|yes|O
@@ -45,11 +45,12 @@ subgraph Payment Bot
         R -->|No|E
         R-->|Yes|D
         S-->|call to make payment against Token |T
-        T-->U
+        V-->T
         U-->B
+        
     end
 subgraph Credit Card collection
-        H -->|2nd Leg |B
+       
         B-->I
         I-->J
         J-->K
@@ -62,4 +63,8 @@ subgraph Credit Card collection
 subgraph External system
         L-->M
         M-->L
+        T-->U
+        V-->W
+        T-->V
+        
     end

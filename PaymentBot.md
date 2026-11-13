@@ -29,32 +29,32 @@ subgraph Ingress Layer
         B -->|Transfer to Payment Bot| C
     end
 subgraph Payment Bot
-        C -->R
-        Q-->|No|O
-        O-->|Collect old Session Details|S
-        H-->B
-        R -->|No|E
-        R-->|Yes|D
+        C-->R
         D-->Q
-        Q-->|Yes|F
         E-->O
-        G-->P
-        P-->|yes|O
-        P-->|No Max 2 retries|G
-        O-->H
-        S-->T
-        T-->U
-        U-->B
         F -->|No| G
         F -->|Yes| O
+        G-->P
+        H-->|1st Leg|B
+        O-->|Give old Session Details|S
+        O-->H
+        P-->|yes|O
+        P-->|No Max 2 retries|G
+        Q-->|No Collect stored Unique ID|O
+        Q-->|Yes|F
+        R -->|No|E
+        R-->|Yes|D
+        S-->|call to make payment against Token |T
+        T-->U
+        U-->B
     end
 subgraph Credit Card collection
-        H -->B
+        H -->|2nd Leg |B
         B-->I
         I-->J
         J-->K
-        S-->N
-        N-->S
+        S-->|Request=Token|N
+        N-->|Response =Token|S
         K-->|No Max retries=2| I
         K-->|External Call for confirmation| L
         L-->N

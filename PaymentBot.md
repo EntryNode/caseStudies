@@ -1,5 +1,5 @@
 ````mermaid
-flowchart TD
+flowchart LR
 A[Main Bot]
 B[CCAAS]
 C[Ingress PaymentBot]
